@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d3ae963a-9cb0-4ff2-b4cc-00eb0396b115" name="Default Changelist" comment="" />
+    <list default="true" id="d3ae963a-9cb0-4ff2-b4cc-00eb0396b115" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/100,10.06proc.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/100,26.72proc.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/100,60.92proc.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/1000,10.09proc.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/1000,27.31proc.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/1000,60.40proc.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/500,10.16proc.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/500,26.94proc.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/500,60.40proc.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CreateGraph.py" beforeDir="false" afterPath="$PROJECT_DIR$/CreateRandomGraph.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReadGraph.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReadGraph.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReadGraphReady.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/text.txt" beforeDir="false" afterPath="$PROJECT_DIR$/text.txt" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,14 +33,22 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1akqmCtoU6L3yoEjdj3xpshK1FQ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/gif/1000,60.40proc(Random2)" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/Diplom" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Github\graphs" />
       <recent name="D:\Github\Graphs" />
     </key>
   </component>
@@ -38,8 +64,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.ReadGraph">
-    <configuration name="CreateGraph" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.main">
+    <configuration name="CreateBarabasiAlbertGraph" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Graphs" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -52,7 +78,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CreateGraph.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CreateBarabasiAlbertGraph.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -61,7 +87,51 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="ReadGraph" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="CreateRandomGraph" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Graphs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Benton\anaconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CreateRandomGraph.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="CreateSmallWorldGraph" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Graphs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Benton\anaconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CreateSmallWorldGraph.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ReadGraph (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Graphs" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -127,7 +197,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="fortest" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Graphs" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -140,51 +210,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/fortest.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="fortest2" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Graphs" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="C:\Users\Benton\anaconda3\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/fortest2.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="random" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Graphs" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="C:\Users\Benton\anaconda3\python.exe" />
-      <option name="WORKING_DIRECTORY" value="C:/Program Files/Python37/Lib" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="C:/Program Files/Python37/Lib/random.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -195,19 +221,19 @@
     </configuration>
     <list>
       <item itemvalue="Python.Unnamed" />
-      <item itemvalue="Python.fortest" />
-      <item itemvalue="Python.fortest2" />
-      <item itemvalue="Python.ReadGraph" />
-      <item itemvalue="Python.CreateGraph" />
-      <item itemvalue="Python.random" />
+      <item itemvalue="Python.ReadGraph (1)" />
+      <item itemvalue="Python.CreateSmallWorldGraph" />
+      <item itemvalue="Python.CreateBarabasiAlbertGraph" />
+      <item itemvalue="Python.CreateRandomGraph" />
+      <item itemvalue="Python.main" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.ReadGraph" />
-        <item itemvalue="Python.CreateGraph" />
-        <item itemvalue="Python.random" />
-        <item itemvalue="Python.fortest" />
-        <item itemvalue="Python.fortest2" />
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python.ReadGraph (1)" />
+        <item itemvalue="Python.CreateSmallWorldGraph" />
+        <item itemvalue="Python.CreateRandomGraph" />
+        <item itemvalue="Python.CreateBarabasiAlbertGraph" />
       </list>
     </recent_temporary>
   </component>
@@ -223,11 +249,42 @@
       <updated>1587290095372</updated>
       <workItem from="1587290096559" duration="37741000" />
       <workItem from="1587592644484" duration="1339000" />
+      <workItem from="1588162050150" duration="16803000" />
+      <workItem from="1588443751063" duration="998000" />
+      <workItem from="1588446115762" duration="12000" />
+      <workItem from="1588838498510" duration="8060000" />
+      <workItem from="1588932399806" duration="657000" />
+      <workItem from="1589301949297" duration="626000" />
+      <workItem from="1589366085382" duration="9228000" />
+      <workItem from="1589444984927" duration="3874000" />
+      <workItem from="1589635130848" duration="12000" />
+      <workItem from="1590056458892" duration="689000" />
+      <workItem from="1590084699377" duration="9000" />
+      <workItem from="1590403979697" duration="2114000" />
+      <workItem from="1590410664938" duration="24000" />
+      <workItem from="1590686574694" duration="26250000" />
+      <workItem from="1590765520647" duration="8952000" />
+      <workItem from="1590860295680" duration="70000" />
+      <workItem from="1591444342719" duration="606000" />
+      <workItem from="1591452158021" duration="4618000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -247,22 +304,34 @@
           <line>1100</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/CreateRandomGraph.py</url>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
-        <watch expression="graph[node[0]]" />
-        <watch expression="list(graph[node[0]]).pop()" />
+        <watch expression="namespace.attack" language="Python" />
       </configuration>
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Graphs$CreateGraph3.coverage" NAME="CreateGraph3 Coverage Results" MODIFIED="1588251546658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Graphs$fortest2.coverage" NAME="fortest2 Coverage Results" MODIFIED="1587300567194" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Graphs$main.coverage" NAME="main Coverage Results" MODIFIED="1587292863830" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Graphs$CreateGraph.coverage" NAME="CreateGraph Coverage Results" MODIFIED="1587328041150" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Graphs$ReadGraph.coverage" NAME="ReadGraph Coverage Results" MODIFIED="1587332108863" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Graphs$fortest.coverage" NAME="fortest Coverage Results" MODIFIED="1587303718813" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/graphs$Main.coverage" NAME="Main Coverage Results" MODIFIED="1588444050069" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../Monitor" />
+    <SUITE FILE_PATH="coverage/graphs$main.coverage" NAME="main Coverage Results" MODIFIED="1590779257825" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Graphs$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1587290784247" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/graphs$CreateBarabasiAlbertGraph.coverage" NAME="CreateBarabasiAlbertGraph Coverage Results" MODIFIED="1589409842126" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/graphs$ReadGraph__1_.coverage" NAME="ReadGraph (1) Coverage Results" MODIFIED="1590694433569" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Graphs$ReadGraph__1_.coverage" NAME="ReadGraph (1) Coverage Results" MODIFIED="1588253014405" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Graphs$ReadGraph.coverage" NAME="ReadGraph Coverage Results" MODIFIED="1587332108863" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/graphs$CreateRandomGraph.coverage" NAME="CreateRandomGraph Coverage Results" MODIFIED="1589410296793" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Graphs$fortest.coverage" NAME="fortest Coverage Results" MODIFIED="1587303718813" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/graphs$CreateSmallWorldGraph.coverage" NAME="CreateSmallWorldGraph Coverage Results" MODIFIED="1589448530480" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Graphs$random.coverage" NAME="random Coverage Results" MODIFIED="1587309311953" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:/Program Files/Python37/Lib" />
+    <SUITE FILE_PATH="coverage/Graphs$CreateGraph2.coverage" NAME="CreateGraph2 Coverage Results" MODIFIED="1588252919455" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
