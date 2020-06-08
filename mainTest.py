@@ -243,110 +243,70 @@ def AttackCentralityEach(graph):
             intaktnost = GenerateIntaktnost(graph)
             return intaktnost, iteration
 
+from pprint import pprint
+from multiprocessing.dummy import Pool as ThreadPool
+import multiprocessing
 
-class StartProgram(Thread):
-    def __init__(self, generate, attack, size, j, retry, seed):
-        super().__init__()
-        self.generate = generate
-        self.attack = attack
-        self.size = size
-        self.j = j
-        self.retry = retry
-        self.seed = seed
+def RunTest(generate, attack, size, j, seed):
+    if generate == 'Random':
+        graph = GenerateRandom(size, j, seed)
+    elif generate == 'Small world':
+        graph = GenerateSmallWorld(size, j, seed)
+    else:
+        try:
+            graph = GenerateBarabasi(size, j, seed)
+        except:
+            return 1, size, True
 
-    def run(self):
-        intaktnost = float(0)
-        iterations = 0
-        errors = 0
-        goodGraphs = 0
-        for i in range(self.retry):
-            if ((i + 1) % (retry / 5) == 0):
-                print('for ' + str(self.j) + ' ' + str((i+1)/self.retry*100) + '%')
+    if attack == 'Random':
+        intaktnost, iterations = AttackRandom(graph)
+    elif attack == 'Centrality':
+        intaktnost, iterations = AttackCentrality(graph)
+    elif attack == 'Centrality with recalculation':
+        intaktnost, iterations = AttackCentralityEach(graph)
+    elif attack == 'Max':
+        intaktnost, iterations = AttackMax(graph)
+    else:
+        intaktnost, iterations = AttackMin(graph)
 
-            graph = nx.Graph()
-            if self.generate == 'Random':
-                graph = GenerateRandom(self.size, self.j, self.seed)
-            elif self.generate == 'Small world':
-                graph = GenerateSmallWorld(self.size, self.j, self.seed)
-            else:
-                try:
-                    graph = GenerateBarabasi(self.size, self.j, self.seed)
-                except:
-                    errors = self.retry
-                    break;
+    error = 0
+    if intaktnost == 0:
+        error = 1
 
-            intaktnost1 = float(0)
-            iterations1 = 0
+    iterations = iterations/size
 
-            if self.attack == 'Random':
-                intaktnost1, iterations1 = AttackRandom(graph)
-            elif self.attack == 'Centrality':
-                intaktnost1, iterations1 = AttackCentrality(graph)
-            elif self.attack == 'Centrality with recalculation':
-                intaktnost1, iterations1 = AttackCentralityEach(graph)
-            elif self.attack == 'Max':
-                intaktnost1, iterations1 = AttackMax(graph)
-            else:
-                intaktnost1, iterations1 = AttackMin(graph)
+    return intaktnost, iterations, error
 
-            if iterations1 != 0:
-                goodGraphs += 1
-            else:
-                errors += 1
+def RunTest2(retry, generate, attack, size, j, seed):
+    urls_list = []
+    test = list()
+    test.append(generate)
+    test.append(attack)
+    test.append(size)
+    test.append(j)
+    test.append(seed)
+    for i in range(0, retry):
+        urls_list.append(test)
 
-            intaktnost += intaktnost1
-            iterations += iterations1
+    pool = ThreadPool(10)
+    results = pool.starmap(RunTest, urls_list)
 
-        if intaktnost == 0:
-            result = ('\nСредняя интактность для ' + str(self.j) + ' = ' + str(1) + '\n'
-                      + 'Среднее количество удаленных вершин для ' + str(self.j) + ' = ' + str(self.size) + '\n'
-                      + 'Средний успех для ' + str(self.j) + ' = ' + str(0) + '\n'
-                      + 'Errors для ' + str(self.j) + ' = ' + str(errors/self.retry) + '\n')
-            print(result)
-        else:
-            srIntaktnost = intaktnost / goodGraphs
-            srIterations = float(iterations / goodGraphs)
-            srIterationsPercent = float(srIterations / self.size)
-            srUspex = 1 - ((srIntaktnost * srIterations) / self.size)
-            result = ('\nСредняя интактность для ' + str(self.j) + ' = ' + str(srIntaktnost) + '\n'
-                      + 'Среднее количество удаленных вершин для ' + str(self.j) + ' = ' + str(srIterationsPercent) + '\n'
-                      + 'Средний успех для ' + str(self.j) + ' = ' + str(srUspex) + '\n'
-                      + 'Errors для ' + str(self.j) + ' = ' + str(float(errors/self.retry)) + '\n')
-            print(result)
+    intaktnosts = 0
+    errors = 0
+    deleted = 0
+    for result in results:
+        intaktnosts += result[0]
+        deleted += result[1]
+        errors += result[2]
+
+    intaktnosts = intaktnosts / (retry-errors)
+    deleted = deleted / (retry - errors)
+    print(intaktnosts)
+    print(deleted)
+    print(str(1 - (intaktnosts * deleted)))
+    print(errors/retry)
 
 
-def createParser():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-size', default=500, type=int, required=False)
-    parser.add_argument('-seed', default=None, type=int)
-    parser.add_argument('-attack', choices=['Random', 'Centrality', 'Centrality with recalculation', 'Max', 'Min'],
-                        default='Centrality with recalculation', required=False)
-    parser.add_argument('-generate', choices=['Random', 'Small world', 'Barabasi'], default='Small world', required=False)
-    parser.add_argument('-rewriting', default=2, type=int, required=False)
-    parser.add_argument('-retry', default=100, type=int, required=False)
-    return parser
-
-
-if __name__ == "__main__":
-    parser = createParser()
-    namespace = parser.parse_args(sys.argv[1:])
-    size = namespace.size
-    attack = namespace.attack
-    generate = namespace.generate
-    rewriting = namespace.rewriting
-    seed = namespace.seed
-    retry = namespace.retry
-
-    j = 0
-    start_time = datetime.now()
-    threads = list()
-    #while j < size:
-    j += 10
-    thread = StartProgram(generate, attack, size, j, retry, seed)
-    threads.append(thread)
-    thread.start()
-
-    for t in threads:
-        t.join()
-
-    print(datetime.now() - start_time)
+start_time = datetime.now()
+RunTest2(100, 'Small world', 'Centrality with recalculation', 100, 10, None)
+print(datetime.now() - start_time)

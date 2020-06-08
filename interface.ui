@@ -97,6 +97,9 @@
    </property>
   </widget>
   <widget class="QProgressBar" name="progressBar">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>17</x>
@@ -106,10 +109,10 @@
     </rect>
    </property>
    <property name="value">
-    <number>24</number>
+    <number>0</number>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="generateLabel">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -122,7 +125,7 @@
     <string>Метод генерации графа</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="attackLabel">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -135,7 +138,7 @@
     <string>Метод атаки на граф</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_3">
+  <widget class="QLabel" name="vertexLabel">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -148,7 +151,7 @@
     <string>Количество вершин у графа</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox">
+  <widget class="QComboBox" name="generateComboBox">
    <property name="geometry">
     <rect>
      <x>210</x>
@@ -173,7 +176,7 @@
     </property>
    </item>
   </widget>
-  <widget class="QComboBox" name="comboBox_2">
+  <widget class="QComboBox" name="attackComboBox">
    <property name="geometry">
     <rect>
      <x>210</x>
@@ -208,7 +211,7 @@
     </property>
    </item>
   </widget>
-  <widget class="QLabel" name="label_4">
+  <widget class="QLabel" name="nodesLabel">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -221,7 +224,7 @@
     <string>Cреднее количество узлов в вершинах</string>
    </property>
   </widget>
-  <widget class="QCheckBox" name="checkBox">
+  <widget class="QCheckBox" name="seedCheckBox">
    <property name="geometry">
     <rect>
      <x>190</x>
@@ -234,7 +237,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="label_5">
+  <widget class="QLabel" name="seedLabel">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -247,7 +250,7 @@
     <string>Использовать seed?</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_6">
+  <widget class="QLabel" name="retryLabel">
    <property name="geometry">
     <rect>
      <x>10</x>
