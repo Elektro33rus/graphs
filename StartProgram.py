@@ -1,41 +1,36 @@
-from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QDialogButtonBox
 from interface import Ui_Dialog as myinterface
-from mainTest3 import StartProgramThread
-from PyQt5 import QtCore, QtGui, QtWidgets
+from MainFunctions import StartProgramThread
+from PyQt5 import QtCore, QtWidgets
 import sys
-from PyQt5.QtCore import QThread, pyqtSignal
-import os
-import time
-from time import gmtime, strftime
-import sys
-from PyQt5.Qt import QVBoxLayout, QLabel, QDialog, QDialogButtonBox, Qt
+from PyQt5.Qt import QDialog
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QApplication
 
 
 class InfoDialog(QDialog):
-    def __init__(self, интактность, удаленныевершины, errors, success, parent=None):
+    def __init__(self, intactness, deletedNodes, errors, success, parent=None):
         super(InfoDialog, self).__init__(parent)
+        self.setWindowTitle('Results')
+        self.setWindowIcon(QIcon('main.png'))
         self.intaktnostLabel = QtWidgets.QLabel(self)
-        self.intaktnostLabel.setGeometry(QtCore.QRect(10, 10, 181, 21))
+        self.intaktnostLabel.setGeometry(QtCore.QRect(10, 10, 180, 25))
         self.intaktnostLabel.setObjectName("intaktnostLabel")
-        self.intaktnostLabel.setText('Интактность: ' + str(интактность) + '%')
+        self.intaktnostLabel.setText('Интактность: ' + str(intactness) + '%')
 
         self.deletedLabel = QtWidgets.QLabel(self)
-        self.deletedLabel.setGeometry(QtCore.QRect(10, 30, 181, 21))
+        self.deletedLabel.setGeometry(QtCore.QRect(10, 30, 180, 25))
         self.deletedLabel.setObjectName("deletedLabel")
-        self.deletedLabel.setText('Удаленных вершин: ' + str(удаленныевершины) + '%')
+        self.deletedLabel.setText('Удаленных вершин: ' + str(deletedNodes) + '%')
 
         self.errorsLabel = QtWidgets.QLabel(self)
-        self.errorsLabel.setGeometry(QtCore.QRect(10, 50, 181, 21))
+        self.errorsLabel.setGeometry(QtCore.QRect(10, 50, 180, 25))
         self.errorsLabel.setObjectName("errorsLabel")
         self.errorsLabel.setText('Успешность: ' + str(success) + '%')
 
         self.errorsLabel = QtWidgets.QLabel(self)
-        self.errorsLabel.setGeometry(QtCore.QRect(10, 70, 181, 21))
+        self.errorsLabel.setGeometry(QtCore.QRect(10, 70, 180, 25))
         self.errorsLabel.setObjectName("errorsLabel")
         self.errorsLabel.setText('Ошибки: ' + str(errors) + '%')
-
+        self.setFixedSize(170, 100)
 
 
 
@@ -48,7 +43,7 @@ class MainForm(QtWidgets.QMainWindow, myinterface):
         self.errors = 0
         self.intaktnost = 0
         self.deleted = 0
-        self.uspeshnost = 0
+        self.success = 0
 
     def StartProgram(self):
         if self.startButton.text() == 'Start':
@@ -62,7 +57,7 @@ class MainForm(QtWidgets.QMainWindow, myinterface):
             self.startThread.change_start_button.connect(self.setStartButtonVal)
             self.startThread.add_new_dialog.connect(self.addnewDialog)
             self.startThread.errors.connect(self.refreshErrors)
-            self.startThread.intaktnost.connect(self.refreshIntaktnost)
+            self.startThread.intactness.connect(self.refreshIntaktnost)
             self.startThread.deleted.connect(self.refreshDeleted)
             self.startThread.start()
             self.startButton.setText('Stop')
@@ -74,17 +69,17 @@ class MainForm(QtWidgets.QMainWindow, myinterface):
             self.startThread.killThread = True
 
     def refreshErrors(self, val):
-        self.errors = val
+        self.errors = round(val, 2)
 
     def refreshIntaktnost(self, val):
-        self.intaktnost = val
+        self.intaktnost = round(val, 2)
 
     def refreshDeleted(self, val):
-        self.deleted = val
-        self.uspeshnost = 100.0 - ((self.intaktnost * self.deleted) / float(self.sizeBox.text()))
+        self.deleted = round(val, 2)
+        self.success = round(100.0 - ((self.intaktnost * self.deleted) / 100), 2)
 
     def addnewDialog(self):
-        w = InfoDialog(self.intaktnost, self.deleted, self.errors, self.uspeshnost, self)
+        w = InfoDialog(self.intaktnost, self.deleted, self.errors, self.success, self)
         w.exec_()
 
     def setProgressVal(self, val):

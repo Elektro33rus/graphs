@@ -1,14 +1,9 @@
 import sys
 import argparse
-import math
-import time
 from threading import Thread
-
 import networkx as nx
 import random
 from datetime import datetime
-from PyQt5.QtCore import QThread
-
 
 def GenerateSmallWorld(size, rewriting, seed):
     return nx.watts_strogatz_graph(size, rewriting, 0.1, seed=seed)
@@ -56,69 +51,68 @@ def GenerateBarabasi(size, rewriting, seed):
 
 
 def GenerateIntaktnost(graph):
-    graphs = list(nx.connected_components(graph))
-    maxGraph = nx.Graph()
-    maxGraph.add_edges_from(graph.edges(graphs[0]))
-    for i in range(len(graphs)):
+    graphConnections = list(nx.connected_components(graph))
+    интактность = 0
+    for i in range(len(graphConnections)):
         nowGraph = nx.Graph()
-        nowGraph.add_edges_from(graph.edges(graphs[i]))
-        if len(maxGraph.nodes) < len(nowGraph.nodes):
-            maxGraph = nowGraph
-
-    graphs = list(nx.connected_components(graph))
-    intaktnost2 = 0
-    for i in range(len(graphs)):
-        nowGraph = graph
-        if len(graph.edges(graphs[i])) == 0:
-            nowGraph = nx.Graph()
-            edge = graphs[i].pop()
-            nowGraph.add_edge(edge, edge)
+        nowGraph.add_edges_from(graph.edges(graphConnections[i]))
+        if len(nowGraph.nodes) == 0:
+            nowGraphNodes = 1
         else:
-            nowGraph = nx.Graph()
-            nowGraph.add_edges_from(graph.edges(graphs[i]))
+            nowGraphNodes = len(nowGraph.nodes)
 
-        if (nowGraph.nodes.items() != maxGraph.nodes.items()):
-            intaktnost2 += len(nowGraph.nodes)
+        for j in range(i + 1, len(graphConnections)):
+            currentGraph = nx.Graph()
+            currentGraph.add_edges_from(graph.edges(graphConnections[j]))
+            if len(currentGraph.nodes) == 0:
+                currentGraphNodes = 1
+            else:
+                currentGraphNodes = len(currentGraph.nodes)
+            интактность += currentGraphNodes*nowGraphNodes*2
 
-    intaktnost3 = 1 - (intaktnost2 / len(graph.nodes))
-    #print(intaktnost3)
-    return intaktnost3
+    return 1 - интактность/(len(graph.nodes) ** 2)
 
 
-def GenerateIntaktnost2(graph):
-    intaktnost1 = 0
-    floy_warshall = list(nx.floyd_warshall(graph).items())
-    for item in floy_warshall:
-        itemList = list(item[1].items())
-        for item2 in itemList:
-            if item2[1] == math.inf:
-                intaktnost1 += 1
+def AttackClustering(graph):
+    iteration = 0
 
-    result = (1 - intaktnost1 / (len(graph.nodes) ** 2))
-    # print(result)
-    return result
+    clustering = nx.square_clustering(graph)
+    list_d = list(clustering.items())
+    list_d.sort(key=lambda i: i[1], reverse=True)
+
+    while True:
+        if (len(graph.nodes) <= 1):
+            return 0, 0
+
+        if ((len(graph.nodes) == 0) and (len(graph.edges) != 0)):
+            intaktnost = GenerateIntaktnost(graph)
+            return intaktnost, iteration
+
+        if not nx.is_connected(graph):
+            intaktnost = GenerateIntaktnost(graph)
+            return intaktnost, iteration
+
+        graph.remove_node(list_d[iteration][0])
+        iteration += 1
 
 
 def AttackRandom(graph):
     iteration = 0
     while True:
-        iteration += 1
-
         if (len(graph.nodes) <= 1):
-            # print('Не смог развязать')
             return 0, 0
 
-        graph.remove_node(random.choice(list(graph.nodes())))
-
         if ((len(graph.nodes) == 0) and (len(graph.edges) != 0)):
-            # print('Развязан, потребовалось %s' % iteration)
             intaktnost = GenerateIntaktnost(graph)
             return intaktnost, iteration
 
         if not nx.is_connected(graph):
-            # print('Развязан, потребовалось %s' % iteration)
             intaktnost = GenerateIntaktnost(graph)
             return intaktnost, iteration
+
+        iteration += 1
+
+        graph.remove_node(random.choice(list(graph.nodes())))
 
 
 def AttackMax(graph):
@@ -136,23 +130,19 @@ def AttackMax(graph):
 
     iteration = 0
     while True:
-        iteration += 1
-
         if (len(graph.nodes) <= 1):
-            # print('Не смог развязать')
             return 0, 0
 
-        graph.remove_node(list_d[iteration][0])
-
         if ((len(graph.nodes) == 0) and (len(graph.edges) != 0)):
-            # print('Развязан, потребовалось %s' % iteration)
             intaktnost = GenerateIntaktnost(graph)
             return intaktnost, iteration
 
         if not nx.is_connected(graph):
-            # print('Развязан, потребовалось %s' % iteration)
             intaktnost = GenerateIntaktnost(graph)
             return intaktnost, iteration
+
+        graph.remove_node(list_d[iteration][0])
+        iteration += 1
 
 
 def AttackMin(graph):
@@ -167,30 +157,26 @@ def AttackMin(graph):
 
     list_d = list(dic.items())
     list_d.sort(key=lambda i: i[1], reverse=True)
-
     node = list_d.pop()
 
     iteration = 0
     while True:
-        iteration += 1
-
         if (len(graph.nodes) <= 1):
-            # print('Не смог развязать')
             return 0, 0
+
+        if ((len(graph.nodes) == 0) and (len(graph.edges) != 0)):
+            intaktnost = GenerateIntaktnost(graph)
+            return intaktnost, iteration
+
+        if not nx.is_connected(graph):
+            intaktnost = GenerateIntaktnost(graph)
+            return intaktnost, iteration
 
         if (len(graph[node[0]]) != 0):
             pope = list(graph[node[0]]).pop()
             graph.remove_node(pope)
 
-        if ((len(graph.nodes) == 0) and (len(graph.edges) != 0)):
-            # print('Развязан, потребовалось %s' % iteration)
-            intaktnost = GenerateIntaktnost(graph)
-            return intaktnost, iteration
-
-        if not nx.is_connected(graph):
-            # print('Развязан, потребовалось %s' % iteration)
-            intaktnost = GenerateIntaktnost(graph)
-            return intaktnost, iteration
+        iteration += 1
 
 
 def AttackCentrality(graph):
@@ -200,48 +186,41 @@ def AttackCentrality(graph):
 
     iteration = 0
     while True:
-        iteration += 1
-
         if (len(graph.nodes) <= 1):
-            # print('Не смог развязать')
             return 0, 0
 
-        graph.remove_node(centralitySorted.pop()[0])
-
         if ((len(graph.nodes) == 0) and (len(graph.edges) != 0)):
-            # print('Развязан, потребовалось %s' % iteration)
             intaktnost = GenerateIntaktnost(graph)
             return intaktnost, iteration
 
         if not nx.is_connected(graph):
-            # print('Развязан, потребовалось %s' % iteration)
             intaktnost = GenerateIntaktnost(graph)
             return intaktnost, iteration
+
+        graph.remove_node(centralitySorted.pop()[0])
+        iteration += 1
 
 
 def AttackCentralityEach(graph):
     iteration = 0
     while True:
-        iteration += 1
-
         if (len(graph.nodes) <= 1):
-            # print('\nНе смог развязать')
             return 0, 0
 
-        centrality = nx.eigenvector_centrality_numpy(graph)
-        centralityList = list(centrality.items())
-        centralitySorted = sorted(centralityList, key=lambda i: i[1])
-        graph.remove_node(centralitySorted.pop()[0])
-
         if ((len(graph.nodes) == 0) and (len(graph.edges) != 0)):
-            # print('Развязан, потребовалось %s' % iteration)
             intaktnost = GenerateIntaktnost(graph)
             return intaktnost, iteration
 
         if not nx.is_connected(graph):
-            # print('Развязан, потребовалось %s' % iteration)
             intaktnost = GenerateIntaktnost(graph)
             return intaktnost, iteration
+
+        centrality = nx.eigenvector_centrality_numpy(graph, tol=1e-03)
+        centralityList = list(centrality.items())
+        centralitySorted = sorted(centralityList, key=lambda i: i[1])
+        graph.remove_node(centralitySorted.pop()[0])
+
+        iteration += 1
 
 
 class StartProgram(Thread):
@@ -255,73 +234,71 @@ class StartProgram(Thread):
         self.seed = seed
 
     def run(self):
-        intaktnost = float(0)
-        iterations = 0
+        intaktnostShare = float(0)
+        iterationsShare = 0
         errors = 0
         goodGraphs = 0
         for i in range(self.retry):
-            if ((i + 1) % (retry / 5) == 0):
+            if ((i + 1) % (retry / 20) == 0):
                 print('for ' + str(self.j) + ' ' + str((i+1)/self.retry*100) + '%')
 
-            graph = nx.Graph()
-            if self.generate == 'Random':
+            if generate == 'Случайный':
                 graph = GenerateRandom(self.size, self.j, self.seed)
-            elif self.generate == 'Small world':
+            elif generate == 'Ватца-Строгаца':
                 graph = GenerateSmallWorld(self.size, self.j, self.seed)
+            elif generate == 'Барабаши-Альберт':
+                graph = GenerateBarabasi(self.size, self.j, self.seed)
             else:
-                try:
-                    graph = GenerateBarabasi(self.size, self.j, self.seed)
-                except:
-                    errors = self.retry
-                    break;
+                return
 
-            intaktnost1 = float(0)
-            iterations1 = 0
-
-            if self.attack == 'Random':
-                intaktnost1, iterations1 = AttackRandom(graph)
-            elif self.attack == 'Centrality':
-                intaktnost1, iterations1 = AttackCentrality(graph)
-            elif self.attack == 'Centrality with recalculation':
-                intaktnost1, iterations1 = AttackCentralityEach(graph)
-            elif self.attack == 'Max':
-                intaktnost1, iterations1 = AttackMax(graph)
+            if attack == 'Случайная':
+                intaktnost, iterations = AttackRandom(graph)
+            elif attack == 'Центральность':
+                intaktnost, iterations = AttackCentrality(graph)
+            elif attack == 'Центральность с перерасчётом':
+                intaktnost, iterations = AttackCentralityEach(graph)
+            elif attack == 'Максимальная связность':
+                intaktnost, iterations = AttackMax(graph)
+            elif attack == 'Минимальная связность':
+                intaktnost, iterations = AttackMin(graph)
+            elif attack == 'Кластеризация':
+                intaktnost, iterations = AttackClustering(graph)
             else:
-                intaktnost1, iterations1 = AttackMin(graph)
+                return
 
-            if iterations1 != 0:
+            if iterations != 0:
                 goodGraphs += 1
             else:
                 errors += 1
 
-            intaktnost += intaktnost1
-            iterations += iterations1
+            intaktnostShare += intaktnost
+            iterationsShare += iterations
 
-        if intaktnost == 0:
-            result = ('\nСредняя интактность для ' + str(self.j) + ' = ' + str(1) + '\n'
+        if intaktnostShare == 0:
+            result = ('\nСредняя интактность для ' + str(self.j) + ' = ' + str(100) + '\n'
                       + 'Среднее количество удаленных вершин для ' + str(self.j) + ' = ' + str(self.size) + '\n'
                       + 'Средний успех для ' + str(self.j) + ' = ' + str(0) + '\n'
                       + 'Errors для ' + str(self.j) + ' = ' + str(errors/self.retry) + '\n')
             print(result)
         else:
-            srIntaktnost = intaktnost / goodGraphs
-            srIterations = float(iterations / goodGraphs)
+            srIntaktnost = intaktnostShare / goodGraphs
+            srIterations = float(iterationsShare / goodGraphs)
             srIterationsPercent = float(srIterations / self.size)
             srUspex = 1 - ((srIntaktnost * srIterations) / self.size)
-            result = ('\nСредняя интактность для ' + str(self.j) + ' = ' + str(srIntaktnost) + '\n'
-                      + 'Среднее количество удаленных вершин для ' + str(self.j) + ' = ' + str(srIterationsPercent) + '\n'
-                      + 'Средний успех для ' + str(self.j) + ' = ' + str(srUspex) + '\n'
-                      + 'Errors для ' + str(self.j) + ' = ' + str(float(errors/self.retry)) + '\n')
+            result = ('\nСредняя интактность для ' + str(self.j) + ' = ' + str(srIntaktnost*100) + '%\n'
+                      + 'Среднее количество удаленных вершин для ' + str(self.j) + ' = ' + str(srIterationsPercent*100) + '%\n'
+                      + 'Средний успех для ' + str(self.j) + ' = ' + str(srUspex*100) + '%\n'
+                      + 'Errors для ' + str(self.j) + ' = ' + str(float(errors/self.retry)*100) + '%\n')
             print(result)
 
 
 def createParser():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-size', default=500, type=int, required=False)
+    parser.add_argument('-size', default=100, type=int, required=False)
     parser.add_argument('-seed', default=None, type=int)
-    parser.add_argument('-attack', choices=['Random', 'Centrality', 'Centrality with recalculation', 'Max', 'Min'],
-                        default='Centrality with recalculation', required=False)
-    parser.add_argument('-generate', choices=['Random', 'Small world', 'Barabasi'], default='Small world', required=False)
+    parser.add_argument('-attack', choices=['Random', 'Centrality', 'Centrality with recalculation', 'Max', 'Min', 'Кластеризация'],
+                        default='Кластеризация', required=False)
+    parser.add_argument('-generate', choices=['Random', 'Ватца-Строгаца', 'Барабаши-Альберт'], default='Ватца-Строгаца', required=False)
     parser.add_argument('-rewriting', default=2, type=int, required=False)
     parser.add_argument('-retry', default=100, type=int, required=False)
     return parser
@@ -340,11 +317,13 @@ if __name__ == "__main__":
     j = 0
     start_time = datetime.now()
     threads = list()
-    #while j < size:
-    j += 10
-    thread = StartProgram(generate, attack, size, j, retry, seed)
-    threads.append(thread)
-    thread.start()
+    while j < size:
+        j += 5
+        if (j >= size):
+            break
+        thread = StartProgram(generate, attack, size, j, retry, seed)
+        threads.append(thread)
+        thread.start()
 
     for t in threads:
         t.join()
