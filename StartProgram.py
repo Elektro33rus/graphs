@@ -21,10 +21,10 @@ class InfoDialog(QDialog):
         self.deletedLabel.setObjectName("deletedLabel")
         self.deletedLabel.setText('Удаленных вершин: ' + str(deletedNodes) + '%')
 
-        self.errorsLabel = QtWidgets.QLabel(self)
-        self.errorsLabel.setGeometry(QtCore.QRect(10, 50, 180, 25))
-        self.errorsLabel.setObjectName("errorsLabel")
-        self.errorsLabel.setText('Успешность: ' + str(success) + '%')
+        self.successLabel = QtWidgets.QLabel(self)
+        self.successLabel.setGeometry(QtCore.QRect(10, 50, 180, 25))
+        self.successLabel.setObjectName("successLabel")
+        self.successLabel.setText('Успешность: ' + str(success) + '%')
 
         self.errorsLabel = QtWidgets.QLabel(self)
         self.errorsLabel.setGeometry(QtCore.QRect(10, 70, 180, 25))
